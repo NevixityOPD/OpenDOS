@@ -22,9 +22,27 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Log.cs" />
+      <Compile Remove="LogWarningLevel.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Log\.vs\VSWorkspaceState.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="Log\.vs\Log\FileContentIndex\2ad2da48-8a9d-4ccf-b5ee-6c3cff92d958.vsidx" />
+      <None Include="Log\.vs\slnx.sqlite" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Cosmos.Build" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Log\.vs\Log\v17\" />
     </ItemGroup>
 
 </Project>
