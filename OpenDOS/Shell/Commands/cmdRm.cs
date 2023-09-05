@@ -24,7 +24,7 @@ namespace OpenDOS.Shell.Commands
                     }
                     catch(Exception ex)
                     {
-                        Log.Log.ShowLog($"rm: Error occured {ex.Message}", Log.LogWarningLevel.Error);
+                        Log.Log.ShowLog($"rm: Error Occured {ex.Message}", Log.LogWarningLevel.Error);
                     }
                 }
                 else if (args[0] == "-d" || args[0] == "--dir")
@@ -35,7 +35,7 @@ namespace OpenDOS.Shell.Commands
                     }
                     catch (Exception ex)
                     {
-                        Log.Log.ShowLog($"rm: Error occured {ex.Message}", Log.LogWarningLevel.Error);
+                        Log.Log.ShowLog($"rm: Error Occured {ex.Message}", Log.LogWarningLevel.Error);
                     }
                 }
             }
