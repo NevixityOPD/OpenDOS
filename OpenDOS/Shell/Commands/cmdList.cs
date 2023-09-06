@@ -19,8 +19,8 @@ namespace OpenDOS.Shell.Commands
                 {
                     Console.WriteLine($"<File>: {Directory.GetFiles(Kernel.currentDir)[i]}");
                 }
-                Console.WriteLine($"Dir(s) : {Directory.GetDirectories(Kernel.currentDir).Length}");
-                Console.WriteLine($"File(s) : {Directory.GetFiles(Kernel.currentDir).Length}");
+                Console.WriteLine($"\n Dir(s) : {Directory.GetDirectories(Kernel.currentDir).Length}");
+                Console.WriteLine($" File(s) : {Directory.GetFiles(Kernel.currentDir).Length}");
             }
             catch
             {

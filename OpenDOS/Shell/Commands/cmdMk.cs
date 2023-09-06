@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace OpenDOS.Shell.Commands
 {
-    public class cmdRm : Command
+    public class cmdMk : Command
     {
-        public cmdRm() : base("rm", "Removes file or directory", User.UserElevation.Root) { }
+        public cmdMk() : base("mk", "Creates file or directory", User.UserElevation.Root) { }
 
         public override void cmdExecuteable(string[] args)
         {
             if (args.Length == 0)
             {
-                Log.Log.ShowLog("rm: Input an argument!", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("mk: Input an argument!", Log.LogWarningLevel.Error);
             }
             else
             {
@@ -20,22 +19,22 @@ namespace OpenDOS.Shell.Commands
                 {
                     try
                     {
-                        File.Delete(args[1]);
+                        File.CreateText(args[1]);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
-                        Log.Log.ShowLog($"rm: Error Occured {ex.Message}", Log.LogWarningLevel.Error);
+                        Log.Log.ShowLog($"mk: Error Occured {ex.Message}", Log.LogWarningLevel.Error);
                     }
                 }
                 else if (args[0] == "-d" || args[0] == "--dir")
                 {
                     try
                     {
-                        Directory.Delete(args[1], true);
+                        Directory.CreateDirectory(args[1]);
                     }
                     catch (Exception ex)
                     {
-                        Log.Log.ShowLog($"rm: Error Occured {ex.Message}", Log.LogWarningLevel.Error);
+                        Log.Log.ShowLog($"mk: Error Occured {ex.Message}", Log.LogWarningLevel.Error);
                     }
                 }
             }

@@ -2,9 +2,6 @@
 using Cosmos.System.FileSystem.VFS;
 using OpenDOS.User;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using Sys = Cosmos.System;
 
 namespace OpenDOS
@@ -31,16 +28,33 @@ namespace OpenDOS
             VFSManager.RegisterVFS(vFS);
             cmdMgr = new Shell.ShellManager();
             usrMgr = new UserManager();
-            PrintDebug("OpenDOS");
+            ConsoleGraphic.Write.WriteTopBar("", ConsoleColor.Cyan);
         }
 
         protected override void Run()
         {
-            ConsoleGraphic.Write.WriteInColor("OpenDOS - ", ConsoleColor.Cyan);
-            ConsoleGraphic.Write.WriteInColor($" {currentDir} - ", ConsoleColor.Green);
-            ConsoleGraphic.Write.WriteInColor($" {currentUser.userName}", ConsoleColor.White);
-            CodePage.Write("\n└> ");
-            cmdMgr.commandFilter(Console.ReadLine());
+            if (Console.CursorTop == Console.WindowHeight - 1)
+            {
+                Console.Clear();
+                ConsoleGraphic.Write.WriteTopBar("", ConsoleColor.Cyan);
+                ConsoleGraphic.Write.WriteInColor("OpenDOS", ConsoleColor.Cyan);
+                ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);
+                ConsoleGraphic.Write.WriteInColor($"{currentDir}", ConsoleColor.Green);
+                ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);
+                ConsoleGraphic.Write.WriteInColor($"{currentUser.userName}", ConsoleColor.White);
+                CodePage.Write("\n└─> ");
+                cmdMgr.commandFilter(Console.ReadLine());
+            }
+            else
+            {
+                ConsoleGraphic.Write.WriteInColor("OpenDOS", ConsoleColor.Cyan);
+                ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);
+                ConsoleGraphic.Write.WriteInColor($"{currentDir}", ConsoleColor.Green);
+                ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);
+                ConsoleGraphic.Write.WriteInColor($"{currentUser.userName}", ConsoleColor.White);
+                CodePage.Write("\n└─> ");
+                cmdMgr.commandFilter(Console.ReadLine());
+            }
         }
     }
 }

@@ -32,6 +32,31 @@ namespace OpenDOS.Setup
                 userElevation = UserElevation.User,
             };
             Kernel.usrMgr.AddUser(newUser);
+
+            Redo:
+            Console.Write("Do you want to set up root user?[y/n] > ");
+            ConsoleKeyInfo ck = Console.ReadKey();
+            Console.WriteLine();
+            if (ck.Key == ConsoleKey.Y)
+            {
+                User.User rootUser = new User.User()
+                {
+                    userName = "root",
+                    passWord = "root",
+                    userElevation = UserElevation.Root,
+                };
+                Kernel.usrMgr.AddUser(rootUser);
+            }
+            else if (ck.Key == ConsoleKey.N)
+            {
+                Console.WriteLine("Root user will not be setted up\n");
+            }
+            else
+            {
+                Console.WriteLine("Please press y(es) or n(o)");
+                goto Redo;
+            }
+
             Console.WriteLine("Setup has been completed, Press any key to reboot...");
             Cosmos.System.Power.Reboot();
         }

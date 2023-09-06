@@ -10,6 +10,7 @@ namespace OpenDOS.Shell.Commands
         public override void cmdExecuteable(string[] args)
         {
             Console.Clear();
+            ConsoleGraphic.Write.WriteTopBar("", ConsoleColor.Cyan);
         }
     }
 }

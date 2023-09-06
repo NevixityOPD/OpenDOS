@@ -11,5 +11,31 @@ namespace OpenDOS.ConsoleGraphic
             Console.Write(text);
             Console.ResetColor();
         }
+
+        public static void WriteTopBar(string activities, ConsoleColor tobbarColor)
+        {
+            Console.SetCursorPosition(0, 0);
+            if(activities == string.Empty) 
+            {
+                Console.BackgroundColor = tobbarColor;
+                Console.Write($"OpenDOS - None");
+                for (int i = 0; i < Console.WindowWidth - $"OpenDOS - None".Length; i++)
+                {
+                    Console.Write(" ");
+                }
+                Console.ResetColor();
+            }
+            else 
+            {
+                Console.BackgroundColor = tobbarColor;
+                Console.Write($"OpenDOS - {activities}");
+                for (int i = 0; i < Console.WindowWidth - $"OpenDOS - {activities}".Length; i++)
+                {
+                    Console.Write(" ");
+                }
+                Console.ResetColor();
+            }
+            Console.WriteLine("");
+        }
     }
 }

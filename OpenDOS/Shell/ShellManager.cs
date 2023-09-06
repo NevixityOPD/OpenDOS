@@ -21,6 +21,8 @@ namespace OpenDOS.Shell
                 new Commands.cmdLogin(),
                 new Commands.cmdWhoami(),
                 new Commands.cmdUser(),
+                new Commands.cmdMk(),
+                new Commands.cmdRm(),
             };
         }
         //Filter command and execute command with a certain name

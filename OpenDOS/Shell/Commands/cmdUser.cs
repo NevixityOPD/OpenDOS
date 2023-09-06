@@ -6,7 +6,7 @@ namespace OpenDOS.Shell.Commands
 {
     public class cmdUser : Command
     {
-        public cmdUser() : base("user", "User command", User.UserElevation.User) { }
+        public cmdUser() : base("user", "User command", User.UserElevation.Root) { }
 
         public override void cmdExecuteable(string[] args)
         {
