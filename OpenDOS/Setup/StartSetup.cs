@@ -9,6 +9,12 @@ namespace OpenDOS.Setup
         public StartSetup()
         {
             Console.Clear();
+            Kernel.currentUser = new User.User()
+            {
+                userName = "installer",
+                passWord = "temp",
+                userElevation = UserElevation.Root,
+            };
             Console.WriteLine("**********************************************");
             Console.WriteLine("*                                            *");
                CodePage.Write("*        █▀█ █▀█ █▀▀ █▄░█ █▀▄ █▀█ █▀         *\n");
@@ -17,9 +23,10 @@ namespace OpenDOS.Setup
             Console.WriteLine("**********************************************");
             Console.WriteLine("Created by Nevixity");
             Console.WriteLine("This is early build, things meant to change\n");
-
             CreateSystemDirectory();
-            Log.Log.ShowLog("System directories has been created", Log.LogWarningLevel.Information);
+            CreateConfig();
+            Kernel.cfgmgr.AddConfig(new Config.Config("true", "LoginAtStart"), Config.ConfigType.SystemConfig);
+            Log.Log.ShowLog("System directories and system config has been created", Log.LogWarningLevel.Information);
             Console.WriteLine("Create a new user\n");
             Console.Write("Enter Username > ");
             string usr = Console.ReadLine();
@@ -82,6 +89,21 @@ namespace OpenDOS.Setup
             {
                 Log.Log.ShowLog("Failed to create Config directory. Re-creating directory", Log.LogWarningLevel.Error);
                 Directory.CreateDirectory(@"0:\System\Config");
+            }
+        }
+
+        private void CreateConfig()
+        {
+            try
+            {
+                Log.Log.ShowLog("Creating System Config", Log.LogWarningLevel.Information);
+                File.CreateText(@"0:\System\Config\SystemConfig.cfg");
+                Log.Log.ShowLog("Creating Global Config", Log.LogWarningLevel.Information);
+                File.CreateText(@"0:\System\Config\GlobalConfig.cfg");
+            }
+            catch
+            {
+                Log.Log.ShowLog("Failed to create config", Log.LogWarningLevel.Error);
             }
         }
     }

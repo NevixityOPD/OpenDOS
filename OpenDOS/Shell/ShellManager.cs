@@ -23,6 +23,9 @@ namespace OpenDOS.Shell
                 new Commands.cmdUser(),
                 new Commands.cmdMk(),
                 new Commands.cmdRm(),
+                new Commands.cmdRead(),
+                new Commands.cmdConfig(),
+                new Commands.cmdShutdown(),
             };
         }
         //Filter command and execute command with a certain name
@@ -73,6 +76,7 @@ namespace OpenDOS.Shell
                                 shellCommand[i].cmdExecuteable(args.ToArray());
                                 searchResult++;
                             }
+                            searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.User)
                         {
@@ -94,6 +98,7 @@ namespace OpenDOS.Shell
                                 shellCommand[i].cmdExecuteable(args.ToArray());
                                 searchResult++;
                             }
+                            searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.User)
                         {
@@ -102,6 +107,7 @@ namespace OpenDOS.Shell
                                 shellCommand[i].cmdExecuteable(args.ToArray());
                                 searchResult++;
                             }
+                            searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.Root)
                         {

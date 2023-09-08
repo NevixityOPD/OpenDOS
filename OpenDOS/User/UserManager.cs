@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 
 namespace OpenDOS.User
 {
@@ -101,14 +99,21 @@ namespace OpenDOS.User
                         try
                         {
                             userdata = File.ReadAllLines($@"0:\System\User\{usr}.usr");
-                            Kernel.currentUser = new User()
+                            if (usr == userdata[0] && psw == userdata[1])
                             {
-                                userName = userdata[0],
-                                passWord = userdata[1],
-                                userElevation = ConvertString(userdata[2]),
-                            };
-                            Log.Log.ShowLog("login: User logged in", Log.LogWarningLevel.Information);
-                            break;
+                                Kernel.currentUser = new User()
+                                {
+                                    userName = userdata[0],
+                                    passWord = userdata[1],
+                                    userElevation = ConvertString(userdata[2]),
+                                };
+                                Log.Log.ShowLog("login: User logged in", Log.LogWarningLevel.Information);
+                                break;
+                            }
+                            else
+                            {
+                                Log.Log.ShowLog("Wrong password or username", Log.LogWarningLevel.Error);
+                            }
                         }
                         catch
                         {
