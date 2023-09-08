@@ -1,0 +1,48 @@
+OpenDOS Command Instruction
+
+Echo - Actual command : "echo"
+- Usage : "echo [args]"
+- Description : Echoes or Print inputted argument 
+
+Clear - Actual command : "clear"
+- Usage : "clear"
+- Description : Clears screen text
+
+Sysprep - Actual command : "sysprep"
+- Usage : "sysprep"
+- Description : System preperation command used to prepare OS (Operating System) by creating System directory and and asking user to create a new user
+
+Help - Actual command : "help"
+- Usage : "help" / "help [command]"
+- Description : Print or list every command description or specifically print command description by inputting commands name as an argument
+
+List - Actual command : "ls"
+- Usage : "ls"
+- Description : Print or list every available directory(s) and file(s) on a current directory
+
+Cd - Actual command : "cd"
+- Usage : "cd [path]" / "cd"
+- Description : Change current directory into specified directory inputted as an argument or change back current directory into root directory (0:\)
+
+Login - Actual command : "login"
+- Usage : "login"
+- Description : Showing both username and password prompt used to logging into an available account
+
+Whoami - Actual command : "whoami"
+- Usage : "whoami"
+- Description : Print current logged in username with its elevation
+
+User - Actual command : "user"
+- Usage : "user [parameter]"
+- Parameter : "list"
+- Description : User command with a multiple functionality. Example : list, remove(upcoming feature), create(upcoming feature), change(upcoming feature)
+
+Make - Actual command : "mk"
+- Usage : "mk [parameter] [path]"
+- Parameter : "-f / --file", "-d / --dir"
+- Description : Make an entirely new file or directory
+
+Remove - Actual command : "rm"
+- Usage : "rm [parameter] [path]"
+- Parameter : "-f / --file", "-d / --dir"
+- Description : Remove a file or directory
