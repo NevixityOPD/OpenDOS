@@ -5,7 +5,7 @@ namespace OpenDOS.Shell.Commands
 {
     public class cmdShutdown : Command
     {
-        public cmdShutdown() : base("shutdown", "Shutdowns.... No need explaination bruh", User.UserElevation.Guest) { }
+        public cmdShutdown() : base("shutdown", "Shutdowns.... No need explaination", User.UserElevation.Guest) { }
 
         public override void cmdExecuteable(string[] args)
         {

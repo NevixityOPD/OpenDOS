@@ -7,8 +7,10 @@ namespace OpenDOS.User
     {
         public void AddUser(User newUser)
         {
-            File.Create($@"0:\System\User\{newUser.userName}.usr");
-            File.WriteAllLines($@"0:\System\User\{newUser.userName}.usr", new string[]
+            Directory.CreateDirectory($@"0:\System\User\{newUser.userName}\");
+            Directory.CreateDirectory($@"0:\System\User\{newUser.userName}\Data");
+            File.Create($@"0:\System\User\{newUser.userName}\{newUser.userName}.usr");
+            File.WriteAllLines($@"0:\System\User\{newUser.userName}\{newUser.userName}.usr", new string[]
             {
                 newUser.userName,
                 newUser.passWord,
@@ -70,9 +72,9 @@ namespace OpenDOS.User
 
         public void Login()
         {
-            string[] userFile = Directory.GetFiles(@"0:\System\User\");
+            string[] userDir = Directory.GetDirectories(@"0:\System\User\");
             
-            if (userFile.Length == 0)
+            if (userDir.Length == 0)
             {
                 Console.WriteLine("No user has been detected!, Please run \"sysprep\" to run system setup");
             }
@@ -89,7 +91,7 @@ namespace OpenDOS.User
                     Console.Write("[userlgn] Enter user password : ");
                     psw = Console.ReadLine();
 
-                    if (!File.Exists($@"0:\System\User\{usr}.usr"))
+                    if (!File.Exists($@"0:\System\User\{usr}\{usr}.usr"))
                     {
                         Log.Log.ShowLog("login: User doesnt exist", Log.LogWarningLevel.Error);
                         break;
@@ -98,7 +100,7 @@ namespace OpenDOS.User
                     {
                         try
                         {
-                            userdata = File.ReadAllLines($@"0:\System\User\{usr}.usr");
+                            userdata = File.ReadAllLines($@"0:\System\User\{usr}\{usr}.usr");
                             if (usr == userdata[0] && psw == userdata[1])
                             {
                                 Kernel.currentUser = new User()

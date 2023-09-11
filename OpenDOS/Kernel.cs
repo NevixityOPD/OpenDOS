@@ -49,7 +49,8 @@ namespace OpenDOS
                 cmdMgr.commandFilter("clear");
             }
 
-            ConsoleGraphic.Write.WriteTopBar("", ConsoleColor.Cyan);
+            Console.Clear();
+            ConsoleGraphic.Write.WriteTopBar("Alpha 0.1(unstable)", ConsoleColor.Cyan);
         }
 
         protected override void Run()
@@ -57,7 +58,8 @@ namespace OpenDOS
             if (Console.CursorTop == Console.WindowHeight - 1)
             {
                 Console.Clear();
-                ConsoleGraphic.Write.WriteTopBar("", ConsoleColor.Cyan);
+                ConsoleGraphic.Write.WriteTopBar("Alpha 0.1(unstable)", ConsoleColor.Cyan);
+                CodePage.Write("┌─");
                 ConsoleGraphic.Write.WriteInColor("OpenDOS", ConsoleColor.Cyan);
                 ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);
                 ConsoleGraphic.Write.WriteInColor($"{currentDir}", ConsoleColor.Green);
@@ -68,6 +70,7 @@ namespace OpenDOS
             }
             else
             {
+                CodePage.Write("┌─");
                 ConsoleGraphic.Write.WriteInColor("OpenDOS", ConsoleColor.Cyan);
                 ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);
                 ConsoleGraphic.Write.WriteInColor($"{currentDir}", ConsoleColor.Green);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace OpenDOS.Shell
 {
@@ -7,6 +8,7 @@ namespace OpenDOS.Shell
     {
         //List of registered commands
         public List<Command> shellCommand;
+        private ExceptionHandler exceptionHandler;
         
         public ShellManager()
         {
@@ -26,7 +28,10 @@ namespace OpenDOS.Shell
                 new Commands.cmdRead(),
                 new Commands.cmdConfig(),
                 new Commands.cmdShutdown(),
+                new Commands.cmdText(),
             };
+
+            exceptionHandler = new();
         }
         //Filter command and execute command with a certain name
         public void commandFilter(string s)
@@ -53,17 +58,17 @@ namespace OpenDOS.Shell
                     {
                         if (Kernel.currentUser.userElevation == User.UserElevation.Guest)
                         {
-                            shellCommand[i].cmdExecuteable(args.ToArray());
+                            exceptionHandler.HandleCommand(i, args.ToArray());
                             searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.User)
                         {
-                            shellCommand[i].cmdExecuteable(args.ToArray());
+                            exceptionHandler.HandleCommand(i, args.ToArray());
                             searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.Root)
                         {
-                            shellCommand[i].cmdExecuteable(args.ToArray());
+                            exceptionHandler.HandleCommand(i, args.ToArray());
                             searchResult++;
                         }
                     }
@@ -73,14 +78,14 @@ namespace OpenDOS.Shell
                         {
                             if (Kernel.usrMgr.VerifyUser())
                             {
-                                shellCommand[i].cmdExecuteable(args.ToArray());
+                                exceptionHandler.HandleCommand(i, args.ToArray());
                                 searchResult++;
                             }
                             searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.User)
                         {
-                            shellCommand[i].cmdExecuteable(args.ToArray());
+                            exceptionHandler.HandleCommand(i, args.ToArray());
                             searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.Root)
@@ -104,14 +109,14 @@ namespace OpenDOS.Shell
                         {
                             if (Kernel.usrMgr.VerifyUser())
                             {
-                                shellCommand[i].cmdExecuteable(args.ToArray());
+                                exceptionHandler.HandleCommand(i, args.ToArray());
                                 searchResult++;
                             }
                             searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.Root)
                         {
-                            shellCommand[i].cmdExecuteable(args.ToArray());
+                            exceptionHandler.HandleCommand(i, args.ToArray());
                             searchResult++;
                         }
                     }
