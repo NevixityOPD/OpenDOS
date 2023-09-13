@@ -16,7 +16,7 @@ namespace OpenDOS.ConsoleGraphic
         {
             Console.SetCursorPosition(0, 0);
             Console.BackgroundColor = tobbarColor;
-            Console.Write($"OpenDOS | Memory : {Cosmos.Core.CPU.GetAmountOfRAM()} mb");
+            Console.Write($"OpenDOS | {activities}");
             for (int i = 0; i < Console.WindowWidth - $"OpenDOS | {activities}".Length; i++)
             {
                 Console.Write(" ");
