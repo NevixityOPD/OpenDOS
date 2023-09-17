@@ -17,6 +17,21 @@ namespace OpenDOS.IntegratedSoftware.TextEditor
             canvas.fileState = FileState.Unsaved;
 
             RunTextEditor = true;
+
+            if (!File.Exists(@"0:\System\Config\GlobalConfig.cfg"))
+            {
+                Log.Log.ShowLog("Config is missing. Please run sysprep", Log.LogWarningLevel.Warning);
+            }
+            else
+            {
+                for (int i = 0; i < File.ReadAllLines(@"0:\System\Config\GlobalConfig.cfg").Length; i++)
+                {
+                    if (File.ReadAllLines(@"0:\System\Config\GlobalConfig.cfg")[i].Split(':')[0] == "textEditorStartPath")
+                    {
+                        canvas.filePath = File.ReadAllLines(@"0:\System\Config\GlobalConfig.cfg")[i].Split(':')[1];
+                    }
+                }
+            }
         }
 
         public void Start()

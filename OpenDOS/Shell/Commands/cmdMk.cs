@@ -17,24 +17,24 @@ namespace OpenDOS.Shell.Commands
             {
                 if (args[0] == "-f" || args[0] == "--file")
                 {
-                    try
+                    if (!args[1].StartsWith(Kernel.currentDir))
                     {
-                        File.CreateText(args[1]);
+                        File.Create($@"{Kernel.currentDir}\{args[1]}");
                     }
-                    catch (Exception ex)
+                    else if (args[1].StartsWith(Kernel.currentDir))
                     {
-                        Log.Log.ShowLog($"mk: Error Occured {ex.Message}", Log.LogWarningLevel.Error);
+                        File.Create(args[1]);
                     }
                 }
                 else if (args[0] == "-d" || args[0] == "--dir")
                 {
-                    try
+                    if (!args[1].StartsWith(Kernel.currentDir))
+                    {
+                        Directory.CreateDirectory($@"{Kernel.currentDir}\{args[1]}");
+                    }
+                    else if (args[1].StartsWith(Kernel.currentDir))
                     {
                         Directory.CreateDirectory(args[1]);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Log.ShowLog($"mk: Error Occured {ex.Message}", Log.LogWarningLevel.Error);
                     }
                 }
             }

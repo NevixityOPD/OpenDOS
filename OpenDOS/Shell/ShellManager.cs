@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
+using System.IO;
 
 namespace OpenDOS.Shell
 {
@@ -29,6 +29,7 @@ namespace OpenDOS.Shell
                 new Commands.cmdConfig(),
                 new Commands.cmdShutdown(),
                 new Commands.cmdText(),
+                new Commands.cmdConsoleUI(),
             };
 
             exceptionHandler = new();
@@ -36,6 +37,12 @@ namespace OpenDOS.Shell
         //Filter command and execute command with a certain name
         public void commandFilter(string s)
         {
+            Kernel.commandLogList.Add(new CommandLog()
+            {
+                commandExecuted = s,
+                userExecutedBy = Kernel.currentUser,
+            });
+
             string[] unfilteredArgs = s.Split(' '); //Splits up command after every space or blackspace into and args
             string command = unfilteredArgs[0]; //Specify command
             int searchResult = 0; //Checks if command exist as a int
@@ -128,6 +135,7 @@ namespace OpenDOS.Shell
                 Log.Log.ShowLog($"shell: \"{command}\" does not exist", Log.LogWarningLevel.Error);
             }
         }
+
 
         public int commandCount()
         {

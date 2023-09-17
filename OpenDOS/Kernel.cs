@@ -1,7 +1,10 @@
-﻿using Cosmos.System.FileSystem;
+﻿using Cosmos.System.ExtendedASCII;
+using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
+using OpenDOS.Shell;
 using OpenDOS.User;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Sys = Cosmos.System;
 
@@ -13,6 +16,10 @@ namespace OpenDOS
         public static CosmosVFS vFS;
         public static UserManager usrMgr;
         public static Config.ConfigManager cfgmgr;
+        public static ConsoleGraphic.UI.UIManager uimgr;
+
+        public static List<Log.LogMessage> logList;
+        public static List<CommandLog> commandLogList;
 
         public static string currentDir = @"0:\";
 
@@ -26,11 +33,15 @@ namespace OpenDOS
         protected override void BeforeRun()
         {
             Console.Clear();
+            Console.OutputEncoding = CosmosEncodingProvider.Instance.GetEncoding(437);
+            logList = new List<Log.LogMessage>();
+            commandLogList = new List<CommandLog>();
             vFS = new CosmosVFS();
             VFSManager.RegisterVFS(vFS);
             cmdMgr = new Shell.ShellManager();
             usrMgr = new UserManager();
             cfgmgr = new Config.ConfigManager();
+            uimgr = new ConsoleGraphic.UI.UIManager();
 
             Log.Log.ShowLog("Loading config, Please wait", Log.LogWarningLevel.Information);
             if (!File.Exists(@"0:\System\Config\SystemConfig.cfg"))

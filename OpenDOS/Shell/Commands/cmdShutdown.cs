@@ -9,6 +9,8 @@ namespace OpenDOS.Shell.Commands
 
         public override void cmdExecuteable(string[] args)
         {
+            Log.Log.SaveLog();
+
             Cosmos.System.Power.Shutdown();
         }
     }

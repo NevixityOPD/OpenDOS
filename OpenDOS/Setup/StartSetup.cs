@@ -85,7 +85,8 @@ namespace OpenDOS.Setup
             Directory.CreateDirectory(@"0:\System\Config");
             Directory.CreateDirectory(@"0:\System\Log");
             Directory.CreateDirectory(@"0:\System\Temp");
-            
+            Directory.CreateDirectory(@"0:\System\Log\CommandLog");
+
             if (!Directory.Exists(@"0:\System"))
             {
                 Log.Log.ShowLog("Failed to create System directory. Re-creating directory", Log.LogWarningLevel.Error);

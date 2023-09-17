@@ -24,5 +24,17 @@ namespace OpenDOS.ConsoleGraphic
             Console.ResetColor();
             Console.WriteLine();
         }
+
+        public static void WriteBottomBar(string Text, ConsoleColor bottomBarColor)
+        {
+            Console.SetCursorPosition(0, Console.WindowHeight);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = bottomBarColor;
+            Console.Write(Text);
+            for (int i = 0; i < Console.BufferWidth - Text.Length; i++)
+            {
+                Console.Write(' ');
+            }
+        }
     }
 }
