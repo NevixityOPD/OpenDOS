@@ -8,6 +8,9 @@ namespace OpenDOS.IntegratedSoftware.TextEditor
         TextCanvas canvas;
         bool RunTextEditor;
 
+        public int startRenderAt_X = 0;
+        public int startRenderAt_Y = 0;
+
         public TextEditor()
         {
             canvas = new TextCanvas();

@@ -17,8 +17,8 @@ namespace OpenDOS.Setup
             };
             Console.WriteLine("**********************************************");
             Console.WriteLine("*                                            *");
-               CodePage.Write("*        █▀█ █▀█ █▀▀ █▄░█ █▀▄ █▀█ █▀         *\n");
-               CodePage.Write("*        █▄█ █▀▀ ██▄ █░▀█ █▄▀ █▄█ ▄█ v1.0    *\n");
+            Console.WriteLine("*        █▀█ █▀█ █▀▀ █▄░█ █▀▄ █▀█ █▀         *");
+            Console.WriteLine("*        █▄█ █▀▀ ██▄ █░▀█ █▄▀ █▄█ ▄█ v1.0    *");
             Console.WriteLine("*                                            *");
             Console.WriteLine("**********************************************");
             Console.WriteLine("Created by Nevixity");

@@ -26,6 +26,7 @@ namespace OpenDOS.Shell.Commands
                     }
                 }
             }
+            Console.WriteLine($"\n{Kernel.cmdMgr.commandCount()}");
         }
     }
 }

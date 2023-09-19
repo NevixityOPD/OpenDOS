@@ -12,7 +12,7 @@ namespace OpenDOS
 {
     public class Kernel : Sys.Kernel
     {
-        public static Shell.ShellManager cmdMgr;
+        public static ShellManager cmdMgr;
         public static CosmosVFS vFS;
         public static UserManager usrMgr;
         public static Config.ConfigManager cfgmgr;
@@ -34,10 +34,20 @@ namespace OpenDOS
         {
             Console.Clear();
             Console.OutputEncoding = CosmosEncodingProvider.Instance.GetEncoding(437);
+
             logList = new List<Log.LogMessage>();
             commandLogList = new List<CommandLog>();
-            vFS = new CosmosVFS();
-            VFSManager.RegisterVFS(vFS);
+
+            try
+            {
+                vFS = new CosmosVFS();
+                VFSManager.RegisterVFS(vFS);
+            }
+            catch(Exception e)
+            {
+                Log.Log.ShowLog($"fs: Error occured {e.Message}", Log.LogWarningLevel.Error);
+                Console.ReadKey();
+            }
             cmdMgr = new Shell.ShellManager();
             usrMgr = new UserManager();
             cfgmgr = new Config.ConfigManager();
@@ -70,24 +80,24 @@ namespace OpenDOS
             {
                 Console.Clear();
                 ConsoleGraphic.Write.WriteTopBar("Alpha 0.1(unstable)", ConsoleColor.Cyan);
-                CodePage.Write("┌─");
+                Console.Write("┌─");
                 ConsoleGraphic.Write.WriteInColor("OpenDOS", ConsoleColor.Cyan);
                 ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);
                 ConsoleGraphic.Write.WriteInColor($"{currentDir}", ConsoleColor.Green);
                 ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);
                 ConsoleGraphic.Write.WriteInColor($"{currentUser.userName}", ConsoleColor.White);
-                CodePage.Write("\n└─> ");
+                Console.Write("\n└─> ");
                 cmdMgr.commandFilter(Console.ReadLine());
             }
             else
             {
-                CodePage.Write("┌─");
+                Console.Write("┌─");
                 ConsoleGraphic.Write.WriteInColor("OpenDOS", ConsoleColor.Cyan);
                 ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);
                 ConsoleGraphic.Write.WriteInColor($"{currentDir}", ConsoleColor.Green);
                 ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);
                 ConsoleGraphic.Write.WriteInColor($"{currentUser.userName}", ConsoleColor.White);
-                CodePage.Write("\n└─> ");
+                Console.Write("\n└─> ");
                 cmdMgr.commandFilter(Console.ReadLine());
             }
         }

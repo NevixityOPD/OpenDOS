@@ -29,7 +29,6 @@ namespace OpenDOS.Shell
                 new Commands.cmdConfig(),
                 new Commands.cmdShutdown(),
                 new Commands.cmdText(),
-                new Commands.cmdConsoleUI(),
             };
 
             exceptionHandler = new();
