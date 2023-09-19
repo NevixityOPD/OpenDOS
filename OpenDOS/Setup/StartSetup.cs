@@ -23,9 +23,11 @@ namespace OpenDOS.Setup
             Console.WriteLine("**********************************************");
             Console.WriteLine("Created by Nevixity");
             Console.WriteLine("This is early build, things meant to change\n");
+            RemoveContentAtDisk();
             CreateSystemDirectory();
             CreateConfig();
             Kernel.cfgmgr.AddConfig(new Config.Config("true", "LoginAtStart"), Config.ConfigType.SystemConfig);
+            Kernel.cfgmgr.AddConfig(new Config.Config("false", "BootIntoGUI"), Config.ConfigType.SystemConfig);
             Log.Log.ShowLog("System directories and system config has been created", Log.LogWarningLevel.Information);
             Console.WriteLine("Create a new user\n");
             ReInput:
@@ -127,6 +129,22 @@ namespace OpenDOS.Setup
             {
                 Log.Log.ShowLog("Failed to create config", Log.LogWarningLevel.Error);
             }
+        }
+
+        private void RemoveContentAtDisk()
+        {
+            Log.Log.ShowLog("Removing all file and directory at disk. This may take a while", Log.LogWarningLevel.Information);
+            for (int i = 0; i < Directory.GetDirectories(Kernel.currentDir).Length; i++)
+            {
+                Log.Log.ShowLog(@$"Deleting {Kernel.currentDir}\{Directory.GetDirectories(Kernel.currentDir)[i]}", Log.LogWarningLevel.Warning);
+                Directory.Delete(@$"{Kernel.currentDir}\{Directory.GetDirectories(Kernel.currentDir)[i]}", true);
+            }
+            for (int i = 0; i < Directory.GetFiles(Kernel.currentDir).Length; i++)
+            {
+                Log.Log.ShowLog(@$"Deleting {Kernel.currentDir}\{Directory.GetFiles(Kernel.currentDir)[i]}", Log.LogWarningLevel.Warning);
+                File.Delete(@$"{Kernel.currentDir}\{Directory.GetFiles(Kernel.currentDir)[i]}");
+            }
+            Log.Log.ShowLog("Success", Log.LogWarningLevel.Information);
         }
     }
 }
