@@ -15,5 +15,15 @@ namespace OpenDOS.Shell
                 Console.WriteLine($"{Kernel.cmdMgr.shellCommand[commandIndex].cmdName}: Error occured {e.Message}");
             }
         }
+
+        public bool CheckArgs(string args)
+        {
+            if (args == string.Empty || args == null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

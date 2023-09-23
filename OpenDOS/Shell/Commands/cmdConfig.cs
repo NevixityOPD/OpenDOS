@@ -20,15 +20,18 @@ namespace OpenDOS.Shell.Commands
             {
                 if (args[0].ToLower() == "sel")
                 {
-                    if (args[1].ToLower() == "sys")
+                    if (!Kernel.cmdMgr.exceptionHandler.CheckArgs(args[1]))
                     {
-                        selectedConfigType = Config.ConfigType.SystemConfig;
-                        Console.WriteLine("System config is selected");
-                    }
-                    else if (args[1].ToLower() == "global")
-                    {
-                        selectedConfigType = Config.ConfigType.GlobalConfig;
-                        Console.WriteLine("Global config is selected");
+                        if (args[1].ToLower() == "sys")
+                        {
+                            selectedConfigType = Config.ConfigType.SystemConfig;
+                            Console.WriteLine("System config is selected");
+                        }
+                        else if (args[1].ToLower() == "global")
+                        {
+                            selectedConfigType = Config.ConfigType.GlobalConfig;
+                            Console.WriteLine("Global config is selected");
+                        }
                     }
                 }
                 else if (args[0].ToLower() == "list")
@@ -73,6 +76,8 @@ namespace OpenDOS.Shell.Commands
                         }
                         else
                         {
+                            if (Kernel.cmdMgr.exceptionHandler.CheckArgs(args[2]) && Kernel.cmdMgr.exceptionHandler.CheckArgs(args[1]) || Kernel.cmdMgr.exceptionHandler.CheckArgs(args[1]))
+
                             Kernel.cfgmgr.AddConfig(new Config.Config(args[2], args[1]), Config.ConfigType.SystemConfig);
                         }
                     }

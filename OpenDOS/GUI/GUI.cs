@@ -1,40 +1,30 @@
-﻿using System;
+﻿using Cosmos.Core.Memory;
+using Cosmos.HAL.Drivers.Video;
+using Cosmos.System.Graphics;
+using PrismAPI.Filesystem.Filesystems.TAR;
+using System;
 using System.Collections.Generic;
-using Cosmos.Core.Memory;
-using Cosmos.HAL;
-using Cosmos.System;
-using IL2CPU.API.Attribs;
-using PrismAPI.Graphics;
-using PrismAPI.Hardware.GPU;
+using System.Drawing;
 
 namespace OpenDOS.GUI
 {
     public class GUI
     {
-        [ManifestResourceStream(ResourceName = "OpenDOS.GUI.Resource.Mouse.bmp")]
-        static byte[] mouse;
-        public static Canvas mouseDisplay = Image.FromBitmap(mouse);
+        public VBECanvas mainDesktopCanvas;
 
-        public Display mainDisplayCanvas = null!;
-
-        public int screen_Y = 600;
-        public int screen_X = 800;
-
-        public bool UpdateGUI = true;
-
-        public void StartGUI()
+        public GUI()
         {
-            MouseManager.ScreenWidth = (ushort)screen_X;
-            MouseManager.ScreenHeight = (ushort)screen_Y;
-            mainDisplayCanvas = Display.GetDisplay((ushort)screen_X, (ushort)screen_Y);
+            mainDesktopCanvas = new VBECanvas();
+            mainDesktopCanvas.Mode = new Mode();
+        }
 
-            while (UpdateGUI)
+        public void Run()
+        {
+            while (true)
             {
-                mainDisplayCanvas.Clear(Color.ClassicBlue);
-                mainDisplayCanvas.DrawString(15, 15, $"{mainDisplayCanvas.GetFPS()} FPS", default, Color.White);
-                mainDisplayCanvas.DrawImage((int)MouseManager.X, (int)MouseManager.Y, mouseDisplay);
+                mainDesktopCanvas.Clear(Color.AliceBlue);
                 Heap.Collect();
-                mainDisplayCanvas.Update();
+                mainDesktopCanvas.Display();
             }
         }
     }

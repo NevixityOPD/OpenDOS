@@ -18,9 +18,6 @@ public class UIManager
     public ConsoleColor foreGroundColor { get; private set; } = ConsoleColor.White;
     public ConsoleColor backGroundColor { get; private set; } = ConsoleColor.Black;
 
-    public List<SubWindows> subWindows { get; private set; } = new List<SubWindows>();
-    public SubWindows currentSubwindowsSelected { get; private set; }
-
     public void Render(string titleSimulation)
     {
         Console.ForegroundColor = foreGroundColor;
@@ -143,43 +140,6 @@ public class UIManager
         if (newLine) { NewLine(); }
     }
 
-    public void RenderSubWindows(SubWindows subWin)
-    {
-        switch (subWin.pos)
-        {
-            case SubWindowsPosition.Left:
-                Console.SetCursorPosition(1, 1);
-                Console.Write("┌");
-                for (int i = 0; i < (winPos_EndsX / 2) - 1; i++)
-                {
-                    Console.Write("─");
-                }
-                Console.Write("┐");
-                Console.SetCursorPosition(1, 2);
-                for (int i = 0; i < winPos_EndsY - 2; i++)
-                {
-                    Console.Write("│");
-                    Console.SetCursorPosition(1, 2 + i);
-                }
-                Console.Write("└");
-                Console.SetCursorPosition((winPos_EndsX / 2) + 1, 2);
-                for (int i = 0; i < winPos_EndsY - 2; i++)
-                {
-                    Console.Write("│");
-                    Console.SetCursorPosition((winPos_EndsX / 2) + 1, 2 + i);
-                }
-                Console.Write("┘");
-                Console.SetCursorPosition(2, winPos_EndsY + 1);
-
-                Console.SetCursorPosition(2, winPos_EndsY - 1);
-                for (int i = 0; i < (winPos_EndsX / 2) - 1; i++)
-                {
-                    Console.Write("─");
-                }
-                break;
-        }
-    }
-
     public string ReadLine()
     {
         string text = Console.ReadLine();
@@ -187,23 +147,3 @@ public class UIManager
         return text;
     }
 }
-
-public class SubWindows
-{
-    public string titles;
-    public ConsoleColor forefroundColor;
-    public ConsoleColor backgroundColor;
-    public SubWindowsPosition pos;
-
-    public int posX;
-    public int posY;
-
-    public void NewLine()
-    {
-
-    }
-
-    
-}
-
-public enum SubWindowsPosition { Left, Right, Down, Up }

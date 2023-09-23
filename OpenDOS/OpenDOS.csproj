@@ -19,15 +19,9 @@
         <PxeInterface>192.168.0.8</PxeInterface>
 		<DebugEnabled>False</DebugEnabled>
 		<GenerateMapFile>True</GenerateMapFile>
+		<CompileVBEMultiboot>False</CompileVBEMultiboot>
+		<VBEResolution>800x600x32</VBEResolution>
     </PropertyGroup>
-
-    <ItemGroup>
-      <None Remove="GUI\Resource\Mouse.bmp" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Include="GUI\Resource\Mouse.bmp" />
-    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Cosmos.Build" Version="0-*" NoWarn="NU1604" />

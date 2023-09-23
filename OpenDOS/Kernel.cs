@@ -1,6 +1,7 @@
 ﻿using Cosmos.System.ExtendedASCII;
 using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
+using OpenDOS.GUI;
 using OpenDOS.Shell;
 using OpenDOS.User;
 using System;
@@ -17,7 +18,6 @@ namespace OpenDOS
         public static UserManager usrMgr;
         public static Config.ConfigManager cfgmgr;
         public static ConsoleGraphic.UI.UIManager uimgr;
-        public static GUI.GUI guimgr;
 
         public static List<Log.LogMessage> logList;
         public static List<CommandLog> commandLogList;
@@ -53,25 +53,8 @@ namespace OpenDOS
             usrMgr = new UserManager();
             cfgmgr = new Config.ConfigManager();
             uimgr = new ConsoleGraphic.UI.UIManager();
-            guimgr = new GUI.GUI();
 
             Log.Log.ShowLog("Loading config, Please wait", Log.LogWarningLevel.Information);
-            if (!File.Exists(@"0:\System\Config\SystemConfig.cfg"))
-            {
-                Log.Log.ShowLog("Config is missing. Please run sysprep", Log.LogWarningLevel.Warning);
-            }
-            else
-            {
-                for (int i = 0; i < File.ReadAllLines(@"0:\System\Config\SystemConfig.cfg").Length; i++)
-                {
-                    if (File.ReadAllLines(@"0:\System\Config\SystemConfig.cfg")[i].Split(':')[0] == "BootIntoGUI" && File.ReadAllLines(@"0:\System\Config\SystemConfig.cfg")[i].Split(':')[1] == "true")
-                    {
-                        Console.Clear();
-                        guimgr.StartGUI();
-                    }
-                }
-            }
-
             if (!File.Exists(@"0:\System\Config\SystemConfig.cfg"))
             {
                 Log.Log.ShowLog("Config is missing. Please run sysprep", Log.LogWarningLevel.Warning);

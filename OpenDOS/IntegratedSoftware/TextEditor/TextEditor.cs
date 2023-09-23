@@ -40,11 +40,11 @@ namespace OpenDOS.IntegratedSoftware.TextEditor
         public void Start()
         {
             Console.Clear();
+
             while (RunTextEditor)
             {
                 if (canvas.fileState == FileState.Saved)
                 {
-                    Console.Clear();
                     Console.SetCursorPosition(0, 0);
                     Console.BackgroundColor = ConsoleColor.Yellow;
                     Console.Write($"Text Editor - {canvas.fileName} - Press ESC to enter menu");
@@ -53,7 +53,6 @@ namespace OpenDOS.IntegratedSoftware.TextEditor
                 }
                 else
                 {
-                    Console.Clear();
                     Console.SetCursorPosition(0, 0);
                     Console.BackgroundColor = ConsoleColor.Yellow;
                     Console.Write($"Text Editor - {canvas.fileName}* - Press ESC to enter menu");
@@ -84,6 +83,8 @@ namespace OpenDOS.IntegratedSoftware.TextEditor
                     string temp = canvas.textLine[canvas.cursorY].Substring(0, canvas.cursorX - 1);
                     canvas.textLine[canvas.cursorY] = temp;
                     canvas.cursorX--;
+                    Console.SetCursorPosition(canvas.cursorX + 2, canvas.cursorY + 1);
+                    Console.Write(' ');
                 }
                 canvas.fileState = FileState.Unsaved;
             }

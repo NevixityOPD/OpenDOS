@@ -18,6 +18,8 @@ namespace OpenDOS.IntegratedSoftware.TextEditor
 
         public void Render()
         {
+            Console.SetCursorPosition(0, 1);
+
             for(int i = 0; i < textLine.Length; i++)
             {
                 if (i == cursorY)

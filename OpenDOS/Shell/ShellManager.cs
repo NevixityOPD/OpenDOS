@@ -8,7 +8,7 @@ namespace OpenDOS.Shell
     {
         //List of registered commands
         public List<Command> shellCommand;
-        private ExceptionHandler exceptionHandler;
+        public ExceptionHandler exceptionHandler;
         
         public ShellManager()
         {
