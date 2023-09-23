@@ -146,10 +146,36 @@ namespace OpenDOS.IntegratedSoftware.TextEditor
                     Console.WriteLine();
                     if (ck.Key == ConsoleKey.Y)
                     {
-                        File.Create($@"{canvas.filePath}\{canvas.fileName}.txt");
-                        File.WriteAllLines($@"{canvas.filePath}\{canvas.fileName}.txt", canvas.textLine);
-                        canvas.textLine = null;
-                        RunTextEditor = false;
+                        Redo:
+                        Console.Write("Do you want to change file name and directory?[y/n] > ");
+                        ConsoleKeyInfo key = Console.ReadKey();
+                        Console.WriteLine();
+                        if (key.Key == ConsoleKey.Y)
+                        {
+                            Console.Write("Enter new file name > ");
+                            canvas.fileName = Console.ReadLine();
+
+                            Console.Write("Enter new file path > ");
+                            canvas.filePath = Console.ReadLine();
+
+                            File.Create($@"{canvas.filePath}\{canvas.fileName}.txt");
+                            File.WriteAllLines($@"{canvas.filePath}\{canvas.fileName}.txt", canvas.textLine);
+                            canvas.textLine = null;
+                            RunTextEditor = false;
+                        }
+                        else if (key.Key == ConsoleKey.N)
+                        {
+                            File.Create($@"{canvas.filePath}\{canvas.fileName}.txt");
+                            File.WriteAllLines($@"{canvas.filePath}\{canvas.fileName}.txt", canvas.textLine);
+                            canvas.textLine = null;
+                            RunTextEditor = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please enter Y(es) or N(o)");
+                            goto Redo;
+                        }
+                        Kernel.cmdMgr.commandFilter("clear");
                     }
                     else if (ck.Key == ConsoleKey.N)
                     {

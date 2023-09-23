@@ -23,6 +23,7 @@ namespace OpenDOS
         public static List<CommandLog> commandLogList;
 
         public static string currentDir = @"0:\";
+        public static string currentVersion = "0.1 Alpha(Unstable)";
 
         public static User.User currentUser = new User.User()
         {
