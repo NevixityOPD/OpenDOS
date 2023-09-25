@@ -14,7 +14,7 @@ namespace OpenDOS.Shell.Commands
         {
             if (args.Length == 0)
             {
-                Log.Log.ShowLog("conf: Input an argument!", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("conf: Input an argument!", Log.LogWarningLevel.Error, Log.LogWritter.System);
             }
             else
             {

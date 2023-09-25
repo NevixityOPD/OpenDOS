@@ -1,7 +1,6 @@
 ﻿using Cosmos.System.ExtendedASCII;
 using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
-using OpenDOS.GUI;
 using OpenDOS.Shell;
 using OpenDOS.User;
 using System;
@@ -47,7 +46,7 @@ namespace OpenDOS
             }
             catch(Exception e)
             {
-                Log.Log.ShowLog($"fs: Error occured {e.Message}", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog($"fs: Error occured {e.Message}", Log.LogWarningLevel.Error, Log.LogWritter.System);
                 Console.ReadKey();
             }
             cmdMgr = new ShellManager();
@@ -55,10 +54,10 @@ namespace OpenDOS
             cfgmgr = new Config.ConfigManager();
             uimgr = new ConsoleGraphic.UI.UIManager();
 
-            Log.Log.ShowLog("Loading config, Please wait", Log.LogWarningLevel.Information);
+            Log.Log.ShowLog("Loading config, Please wait", Log.LogWarningLevel.Information, Log.LogWritter.System);
             if (!File.Exists(@"0:\System\Config\SystemConfig.cfg"))
             {
-                Log.Log.ShowLog("Config is missing. Please run sysprep", Log.LogWarningLevel.Warning);
+                Log.Log.ShowLog("Config is missing. Please run sysprep", Log.LogWarningLevel.Warning, Log.LogWritter.System);
             }
             else
             {

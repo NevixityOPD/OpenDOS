@@ -18,38 +18,15 @@ namespace OpenDOS.User
             });
         }
 
-        public void SetUser(string[] userFile)
-        {
-            try
-            {
-               Kernel.currentUser = new()
-               {
-                   userName = userFile[0],
-                   passWord = userFile[1],
-                   userElevation = ConvertString(userFile[2]),
-               };
-            }
-            catch
-            {
-                Log.Log.ShowLog("usermgr: Failed to set user, Current user is now guest", Log.LogWarningLevel.Error);
-                Kernel.currentUser = new()
-                {
-                    userName = "guest",
-                    passWord = "guest",
-                    userElevation = UserElevation.Guest,
-                };
-            }
-        }
-
         public bool VerifyUser()
         {
             if (Kernel.currentUser == null)
             {
-                Log.Log.ShowLog("Please logged into a user first!", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("Please logged into a user first!", Log.LogWarningLevel.Error, Log.LogWritter.System);
             }
             else if (Kernel.currentUser.userElevation == UserElevation.Guest)
             {
-                Log.Log.ShowLog("Please logged into a user first!", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("Please logged into a user first!", Log.LogWarningLevel.Error, Log.LogWritter.System);
             }
             else
             {
@@ -93,7 +70,7 @@ namespace OpenDOS.User
 
                     if (!File.Exists($@"0:\System\User\{usr}\{usr}.usr"))
                     {
-                        Log.Log.ShowLog("login: User doesnt exist", Log.LogWarningLevel.Error);
+                        Log.Log.ShowLog("login: User doesnt exist", Log.LogWarningLevel.Error, Log.LogWritter.System);
                         break;
                     }
                     else
@@ -109,17 +86,17 @@ namespace OpenDOS.User
                                     passWord = userdata[1],
                                     userElevation = ConvertString(userdata[2]),
                                 };
-                                Log.Log.ShowLog("login: User logged in", Log.LogWarningLevel.Information);
+                                Log.Log.ShowLog("login: User logged in", Log.LogWarningLevel.Information, Log.LogWritter.System);
                                 break;
                             }
                             else
                             {
-                                Log.Log.ShowLog("Wrong password or username", Log.LogWarningLevel.Error);
+                                Log.Log.ShowLog("Wrong password or username", Log.LogWarningLevel.Error, Log.LogWritter.System);
                             }
                         }
                         catch
                         {
-                            Log.Log.ShowLog("login: Error occured", Log.LogWarningLevel.Error);
+                            Log.Log.ShowLog("login: Error occured", Log.LogWarningLevel.Error, Log.LogWritter.System);
                         }
                     }
                 }

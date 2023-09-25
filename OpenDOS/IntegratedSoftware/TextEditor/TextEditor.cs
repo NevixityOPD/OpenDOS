@@ -23,7 +23,7 @@ namespace OpenDOS.IntegratedSoftware.TextEditor
 
             if (!File.Exists(@"0:\System\Config\GlobalConfig.cfg"))
             {
-                Log.Log.ShowLog("Config is missing. Please run sysprep", Log.LogWarningLevel.Warning);
+                Log.Log.ShowLog("Config is missing. Please run sysprep", Log.LogWarningLevel.Warning, Log.LogWritter.System);
             }
             else
             {

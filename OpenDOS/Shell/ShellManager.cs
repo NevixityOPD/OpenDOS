@@ -29,6 +29,7 @@ namespace OpenDOS.Shell
                 new Commands.cmdConfig(),
                 new Commands.cmdShutdown(),
                 new Commands.cmdText(),
+                new Commands.cmdDebug(),
             };
 
             exceptionHandler = new();
@@ -131,7 +132,7 @@ namespace OpenDOS.Shell
 
             if(searchResult == 0)
             {
-                Log.Log.ShowLog($"shell: \"{command}\" does not exist", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog($"shell: \"{command}\" does not exist", Log.LogWarningLevel.Error, Log.LogWritter.System);
             }
         }
 

@@ -12,7 +12,7 @@ namespace OpenDOS.Shell.Commands
         {
             if(args.Length == 0)
             {
-                Log.Log.ShowLog("user: Input an arguments!", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("user: Input an arguments!", Log.LogWarningLevel.Error, Log.LogWritter.System);
             }
             else
             {

@@ -11,7 +11,7 @@ namespace OpenDOS.IntegratedSoftware.FileManager
         public FileManager()
         {
             Console.Clear();
-            Log.Log.ShowLog("Retrieaving content on current directory. Disclaimer this file manager is kinda slow", Log.LogWarningLevel.Information);
+            Log.Log.ShowLog("Retrieaving content on current directory. Disclaimer this file manager is kinda slow", Log.LogWarningLevel.Information, Log.LogWritter.System);
         }
 
         public void Start()

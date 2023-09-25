@@ -24,8 +24,8 @@ namespace OpenDOS.Shell.Commands
             }
             catch
             {
-                Log.Log.ShowLog("ls: Something went wrong", Log.LogWarningLevel.Error);
-                Log.Log.ShowLog(@"Changing directory back to : 0:\", Log.LogWarningLevel.Information);
+                Log.Log.ShowLog("ls: Something went wrong", Log.LogWarningLevel.Error, Log.LogWritter.System);
+                Log.Log.ShowLog(@"Changing directory back to : 0:\", Log.LogWarningLevel.Information, Log.LogWritter.System);
                 Kernel.currentDir = @"0:\";
             }
         }

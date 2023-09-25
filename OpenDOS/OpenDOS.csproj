@@ -17,10 +17,10 @@
         <Profile>VMware</Profile>
         <Description>Use VMware Player or Workstation to deploy and debug.</Description>
         <PxeInterface>192.168.0.8</PxeInterface>
-		<DebugEnabled>False</DebugEnabled>
+        <RemoveBootDebugOutput>True</RemoveBootDebugOutput>
+        <DebugEnabled>False</DebugEnabled>
+        <VMWareEdition>Player</VMWareEdition>
 		<GenerateMapFile>True</GenerateMapFile>
-		<CompileVBEMultiboot>False</CompileVBEMultiboot>
-		<VBEResolution>800x600x32</VBEResolution>
     </PropertyGroup>
 
     <ItemGroup>
@@ -28,12 +28,6 @@
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Plugs" Version="0-*" NoWarn="NU1604" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="PrismAPI">
-        <HintPath>..\ExternalLibrary\PrismAPI.dll</HintPath>
-      </Reference>
     </ItemGroup>
 
 </Project>

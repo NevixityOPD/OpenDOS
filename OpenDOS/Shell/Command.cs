@@ -1,4 +1,6 @@
-﻿namespace OpenDOS.Shell
+﻿using System.Collections.Generic;
+
+namespace OpenDOS.Shell
 {
     public abstract class Command
     {

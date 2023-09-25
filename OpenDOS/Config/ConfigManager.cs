@@ -13,13 +13,13 @@ namespace OpenDOS.Config
                 case ConfigType.SystemConfig:
                     if (Kernel.currentUser.userElevation != User.UserElevation.Root)
                     {
-                        Log.Log.ShowLog("User must be a root to write config into System configuration", Log.LogWarningLevel.Error);
+                        Log.Log.ShowLog("User must be a root to write config into System configuration", Log.LogWarningLevel.Error, Log.LogWritter.System);
                     }
                     else
                     {
                         if (!File.Exists(@"0:\System\Config\SystemConfig.cfg"))
                         {
-                            Log.Log.ShowLog("System configuration is missing. Please run sysprep", Log.LogWarningLevel.Error);
+                            Log.Log.ShowLog("System configuration is missing. Please run sysprep", Log.LogWarningLevel.Error, Log.LogWritter.System);
                         }
                         else
                         {
@@ -39,7 +39,7 @@ namespace OpenDOS.Config
                             }
                             catch (Exception ex)
                             {
-                                Log.Log.ShowLog($"cfgmgr: Error occured {ex.Message}", Log.LogWarningLevel.Error);
+                                Log.Log.ShowLog($"cfgmgr: Error occured {ex.Message}", Log.LogWarningLevel.Error, Log.LogWritter.System);
                             }
                         }
                     }
@@ -47,7 +47,7 @@ namespace OpenDOS.Config
                 case ConfigType.GlobalConfig:
                     if (!File.Exists(@"0:\System\Config\GlobalConfig.cfg"))
                     {
-                        Log.Log.ShowLog("Global configuration is missing. Please run sysprep", Log.LogWarningLevel.Error);
+                        Log.Log.ShowLog("Global configuration is missing. Please run sysprep", Log.LogWarningLevel.Error, Log.LogWritter.System);
                     }
                     else
                     {
@@ -57,7 +57,7 @@ namespace OpenDOS.Config
                         }
                         catch (Exception ex)
                         {
-                            Log.Log.ShowLog($"cfgmgr: Error occured {ex.Message}", Log.LogWarningLevel.Error);
+                            Log.Log.ShowLog($"cfgmgr: Error occured {ex.Message}", Log.LogWarningLevel.Error, Log.LogWritter.System);
                         }
                     }
                     break;

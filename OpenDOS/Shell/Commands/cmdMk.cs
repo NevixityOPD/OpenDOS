@@ -11,7 +11,7 @@ namespace OpenDOS.Shell.Commands
         {
             if (args.Length == 0)
             {
-                Log.Log.ShowLog("mk: Input an argument!", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("mk: Input an argument!", Log.LogWarningLevel.Error, Log.LogWritter.System);
             }
             else
             {

@@ -1,6 +1,4 @@
-﻿using Cosmos.Core.Memory;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace OpenDOS.IntegratedSoftware.TextEditor
 {

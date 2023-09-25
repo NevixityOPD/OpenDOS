@@ -28,7 +28,7 @@ namespace OpenDOS.Setup
             CreateConfig();
             Kernel.cfgmgr.AddConfig(new Config.Config("true", "LoginAtStart"), Config.ConfigType.SystemConfig);
             Kernel.cfgmgr.AddConfig(new Config.Config("false", "BootIntoGUI"), Config.ConfigType.SystemConfig);
-            Log.Log.ShowLog("System directories and system config has been created", Log.LogWarningLevel.Information);
+            Log.Log.ShowLog("System directories and system config has been created", Log.LogWarningLevel.Information, Log.LogWritter.System);
             Console.WriteLine("Create a new user\n");
             ReInput:
             Console.Write("Enter Username > ");
@@ -81,7 +81,7 @@ namespace OpenDOS.Setup
 
         private void CreateSystemDirectory()
         {
-            Log.Log.ShowLog("Creating system directory", Log.LogWarningLevel.Information);
+            Log.Log.ShowLog("Creating system directory", Log.LogWarningLevel.Information, Log.LogWritter.System);
             Directory.CreateDirectory(@"0:\System");
             Directory.CreateDirectory(@"0:\System\User");
             Directory.CreateDirectory(@"0:\System\Config");
@@ -91,27 +91,27 @@ namespace OpenDOS.Setup
 
             if (!Directory.Exists(@"0:\System"))
             {
-                Log.Log.ShowLog("Failed to create System directory. Re-creating directory", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("Failed to create System directory. Re-creating directory", Log.LogWarningLevel.Error, Log.LogWritter.System);
                 Directory.CreateDirectory(@"0:\System");
             }
             if (!Directory.Exists(@"0:\System\User"))
             {
-                Log.Log.ShowLog("Failed to create User directory. Re-creating directory", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("Failed to create User directory. Re-creating directory", Log.LogWarningLevel.Error, Log.LogWritter.System);
                 Directory.CreateDirectory(@"0:\System\User");
             }
             if (!Directory.Exists(@"0:\System\Config"))
             {
-                Log.Log.ShowLog("Failed to create Config directory. Re-creating directory", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("Failed to create Config directory. Re-creating directory", Log.LogWarningLevel.Error, Log.LogWritter.System);
                 Directory.CreateDirectory(@"0:\System\Config");
             }
             if (!Directory.Exists(@"0:\System\Log"))
             {
-                Log.Log.ShowLog("Failed to create Log directory. Re-creating directory", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("Failed to create Log directory. Re-creating directory", Log.LogWarningLevel.Error, Log.LogWritter.System);
                 Directory.CreateDirectory(@"0:\System\Log");
             }
             if (!Directory.Exists(@"0:\System\Temp"))
             {
-                Log.Log.ShowLog("Failed to create Temp directory. Re-creating directory", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("Failed to create Temp directory. Re-creating directory", Log.LogWarningLevel.Error, Log.LogWritter.System);
                 Directory.CreateDirectory(@"0:\System\Temp");
             }
         }
@@ -120,31 +120,31 @@ namespace OpenDOS.Setup
         {
             try
             {
-                Log.Log.ShowLog("Creating System Config", Log.LogWarningLevel.Information);
+                Log.Log.ShowLog("Creating System Config", Log.LogWarningLevel.Information, Log.LogWritter.System);
                 File.CreateText(@"0:\System\Config\SystemConfig.cfg");
-                Log.Log.ShowLog("Creating Global Config", Log.LogWarningLevel.Information);
+                Log.Log.ShowLog("Creating Global Config", Log.LogWarningLevel.Information, Log.LogWritter.System);
                 File.CreateText(@"0:\System\Config\GlobalConfig.cfg");
             }
             catch
             {
-                Log.Log.ShowLog("Failed to create config", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("Failed to create config", Log.LogWarningLevel.Error, Log.LogWritter.System);
             }
         }
 
         private void RemoveContentAtDisk()
         {
-            Log.Log.ShowLog("Removing all file and directory at disk. This may take a while", Log.LogWarningLevel.Information);
-            for (int i = 0; i < Directory.GetDirectories(Kernel.currentDir).Length; i++)
+            Log.Log.ShowLog("Removing all file and directory at disk. This may take a while", Log.LogWarningLevel.Information, Log.LogWritter.System);
+            for (int i = 0; i < Directory.GetDirectories(@"0:\").Length; i++)
             {
-                Log.Log.ShowLog(@$"Deleting {Kernel.currentDir}\{Directory.GetDirectories(Kernel.currentDir)[i]}", Log.LogWarningLevel.Warning);
-                Directory.Delete(@$"{Kernel.currentDir}\{Directory.GetDirectories(Kernel.currentDir)[i]}", true);
+                Log.Log.ShowLog(@$"Deleting {@"0:\"}\{Directory.GetDirectories(@"0:\")[i]}", Log.LogWarningLevel.Warning, Log.LogWritter.System);
+                Directory.Delete(@$"{@"0:\"}\{Directory.GetDirectories(@"0:\")[i]}", true);
             }
-            for (int i = 0; i < Directory.GetFiles(Kernel.currentDir).Length; i++)
+            for (int i = 0; i < Directory.GetFiles(@"0:\").Length; i++)
             {
-                Log.Log.ShowLog(@$"Deleting {Kernel.currentDir}\{Directory.GetFiles(Kernel.currentDir)[i]}", Log.LogWarningLevel.Warning);
-                File.Delete(@$"{Kernel.currentDir}\{Directory.GetFiles(Kernel.currentDir)[i]}");
+                Log.Log.ShowLog(@$"Deleting {@"0:\"}\{Directory.GetFiles(@"0:\")[i]}", Log.LogWarningLevel.Warning, Log.LogWritter.System);
+                File.Delete(@$"{@"0:\"}\{Directory.GetFiles(@"0:\")[i]}");
             }
-            Log.Log.ShowLog("Success", Log.LogWarningLevel.Information);
+            Log.Log.ShowLog("Success", Log.LogWarningLevel.Information, Log.LogWritter.System);
         }
     }
 }

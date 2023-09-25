@@ -15,7 +15,14 @@ namespace OpenDOS.Shell.Commands
             }
             else
             {
-                Kernel.currentDir = args[0];
+                if (args[0].Contains(Kernel.currentDir))
+                {
+                    Kernel.currentDir = args[0];
+                }
+                else
+                {
+                    Kernel.currentDir = $@"{Kernel.currentDir}\{args[0]}";
+                }
             }
         }
     }

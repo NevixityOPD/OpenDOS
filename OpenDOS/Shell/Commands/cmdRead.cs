@@ -13,20 +13,20 @@ namespace OpenDOS.Shell.Commands
         {
             if (args.Length == 0)
             {
-                Log.Log.ShowLog("read: Input an argument!", Log.LogWarningLevel.Error);
+                Log.Log.ShowLog("read: Input an argument!", Log.LogWarningLevel.Error, Log.LogWritter.System);
             }
             else
             {
                 try
                 {
-                    for (int i = 0; i < File.ReadAllLines(args[0]).Length; i++)
+                    for (int i = 0; i < File.ReadAllLines($@"{Kernel.currentDir}\{args[0]}").Length; i++)
                     {
-                        Console.WriteLine(File.ReadAllLines(args[0])[i]);
+                        Console.WriteLine(File.ReadAllLines($@"{Kernel.currentDir}\{args[0]}")[i]);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Log.ShowLog($"read: Error Occured {ex.Message}", Log.LogWarningLevel.Error);
+                    Log.Log.ShowLog($"read: Error Occured {ex.Message}", Log.LogWarningLevel.Error, Log.LogWritter.System);
                 }
             }
         }
