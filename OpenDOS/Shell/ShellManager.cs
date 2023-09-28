@@ -35,12 +35,6 @@ namespace OpenDOS.Shell
         //Filter command and execute command with a certain name
         public void commandFilter(string s)
         {
-            Kernel.commandLogList.Add(new CommandLog()
-            {
-                commandExecuted = s,
-                userExecutedBy = Kernel.currentUser,
-            });
-
             string[] unfilteredArgs = s.Split(' '); //Splits up command after every space or blackspace into and args
             string command = unfilteredArgs[0]; //Specify command
             int searchResult = 0; //Checks if command exist as a int

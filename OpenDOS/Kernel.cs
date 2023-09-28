@@ -21,7 +21,6 @@ namespace OpenDOS
         public static ExceptionManager expmgr;
 
         public static List<Log.LogMessage> logList;
-        public static List<CommandLog> commandLogList;
 
         public static string currentDir = @"0:\";
         public static string currentVersion = "0.1 Alpha(Unstable)";
@@ -39,7 +38,6 @@ namespace OpenDOS
             Console.OutputEncoding = CosmosEncodingProvider.Instance.GetEncoding(437);
 
             logList = new List<Log.LogMessage>();
-            commandLogList = new List<CommandLog>();
 
             try
             {
@@ -50,11 +48,18 @@ namespace OpenDOS
             {
                 expmgr.ThrowException(new Exception.Exception("vFS", e.Message, ExceptionLevel.Fatal));
             }
-            cmdMgr = new ShellManager();
-            usrMgr = new UserManager();
-            cfgmgr = new Config.ConfigManager();
-            uimgr = new ConsoleGraphic.UI.UIManager();
-            expmgr = new ExceptionManager();
+            try
+            {
+                cmdMgr = new ShellManager();
+                usrMgr = new UserManager();
+                cfgmgr = new Config.ConfigManager();
+                uimgr = new ConsoleGraphic.UI.UIManager();
+                expmgr = new ExceptionManager();
+            }
+            catch(System.Exception e)
+            {
+                expmgr.ThrowException(new Exception.Exception("System Feature", e.Message, ExceptionLevel.Fatal));
+            }
 
             Log.Log.ShowLog("Loading config, Please wait", Log.LogWarningLevel.Information, Log.LogWritter.System);
             if (!File.Exists(@"0:\System\Config\SystemConfig.cfg"))
