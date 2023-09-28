@@ -14,13 +14,13 @@ namespace OpenDOS.Shell.Commands
         {
             if (args.Length == 0)
             {
-                Log.Log.ShowLog("conf: Input an argument!", Log.LogWarningLevel.Error, Log.LogWritter.System);
+                Kernel.expmgr.ThrowBasicException("conf", "Input an argument!");
             }
             else
             {
                 if (args[0].ToLower() == "sel")
                 {
-                    if (!Kernel.cmdMgr.exceptionHandler.CheckArgs(args[1]))
+                    if (args[1] != string.Empty)
                     {
                         if (args[1].ToLower() == "sys")
                         {
@@ -32,19 +32,23 @@ namespace OpenDOS.Shell.Commands
                             selectedConfigType = Config.ConfigType.GlobalConfig;
                             Console.WriteLine("Global config is selected");
                         }
+                        else
+                        {
+                            Kernel.expmgr.ThrowBasicException("conf", "No config type was selected");
+                        }
                     }
                 }
                 else if (args[0].ToLower() == "list")
                 {
                     if (selectedConfigType == null)
                     {
-                        Console.WriteLine("Please select config type");
+                        Kernel.expmgr.ThrowBasicException("conf", "Config type is not selected yet");
                     }
                     else if (selectedConfigType == Config.ConfigType.SystemConfig)
                     {
                         if (Kernel.currentUser.userElevation != User.UserElevation.Root)
                         {
-                            Console.WriteLine("User must be a root to do any change to system config");
+                            Kernel.expmgr.ThrowBasicException("conf", "User must be a root to change any system config");
                         }
                         else
                         {
@@ -76,7 +80,7 @@ namespace OpenDOS.Shell.Commands
                         }
                         else
                         {
-                            if (Kernel.cmdMgr.exceptionHandler.CheckArgs(args[2]) && Kernel.cmdMgr.exceptionHandler.CheckArgs(args[1]) || Kernel.cmdMgr.exceptionHandler.CheckArgs(args[1]))
+                            if (args[2] != string.Empty && args[1] != string.Empty || args[1] != string.Empty)
 
                             Kernel.cfgmgr.AddConfig(new Config.Config(args[2], args[1]), Config.ConfigType.SystemConfig);
                         }
@@ -84,6 +88,10 @@ namespace OpenDOS.Shell.Commands
                     else if (selectedConfigType == Config.ConfigType.GlobalConfig)
                     {
                         Kernel.cfgmgr.AddConfig(new Config.Config(args[2], args[1]), Config.ConfigType.GlobalConfig);
+                    }
+                    else
+                    {
+                        Kernel.expmgr.ThrowBasicException("conf", "Input an argument!");
                     }
                 }
                 else if (args[0].ToLower() == "remove")
@@ -128,6 +136,10 @@ namespace OpenDOS.Shell.Commands
                         File.Delete(@"0:\System\Config\GlobalConfig.cfg");
                         File.CreateText(@"0:\System\Config\GlobalConfig.cfg");
                         File.WriteAllLines(@"0:\System\Config\GlobalConfig.cfg", globalConf);
+                    }
+                    else
+                    {
+                        Kernel.expmgr.ThrowBasicException("conf", "Input an argument!");
                     }
                 }
             }

@@ -21,6 +21,9 @@
         <DebugEnabled>False</DebugEnabled>
         <VMWareEdition>Player</VMWareEdition>
 		<GenerateMapFile>True</GenerateMapFile>
+		<BinFormat>Elf</BinFormat>
+		<CompressionType>Gzip</CompressionType>
+		<OptimizationLevel>3</OptimizationLevel>
     </PropertyGroup>
 
     <ItemGroup>

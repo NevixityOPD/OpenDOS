@@ -24,7 +24,7 @@ namespace OpenDOS.Shell.Commands
                         Console.WriteLine(File.ReadAllLines($@"{Kernel.currentDir}\{args[0]}")[i]);
                     }
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     Log.Log.ShowLog($"read: Error Occured {ex.Message}", Log.LogWarningLevel.Error, Log.LogWritter.System);
                 }

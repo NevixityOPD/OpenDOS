@@ -37,7 +37,7 @@ namespace OpenDOS.Config
                                     File.WriteAllLines(@"0:\System\Config\SystemConfig.cfg", strcp);
                                 }
                             }
-                            catch (Exception ex)
+                            catch (System.Exception ex)
                             {
                                 Log.Log.ShowLog($"cfgmgr: Error occured {ex.Message}", Log.LogWarningLevel.Error, Log.LogWritter.System);
                             }
@@ -55,7 +55,7 @@ namespace OpenDOS.Config
                         {
                             File.WriteAllText(@"0:\System\Config\GlobalConfig.cfg", $@"{newConfig.configName}:{newConfig.configValue}");
                         }
-                        catch (Exception ex)
+                        catch (System.Exception ex)
                         {
                             Log.Log.ShowLog($"cfgmgr: Error occured {ex.Message}", Log.LogWarningLevel.Error, Log.LogWritter.System);
                         }

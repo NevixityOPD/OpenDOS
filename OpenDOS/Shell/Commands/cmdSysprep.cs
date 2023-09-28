@@ -9,7 +9,7 @@ namespace OpenDOS.Shell.Commands
 
         public override void cmdExecuteable(string[] args)
         {
-            Setup.StartSetup sysprp = new Setup.StartSetup();
+            Setup.StartSetup sysprep = new Setup.StartSetup();
         }
     }
 }

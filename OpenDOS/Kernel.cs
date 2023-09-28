@@ -1,6 +1,7 @@
 ﻿using Cosmos.System.ExtendedASCII;
 using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
+using OpenDOS.Exception;
 using OpenDOS.Shell;
 using OpenDOS.User;
 using System;
@@ -17,6 +18,7 @@ namespace OpenDOS
         public static UserManager usrMgr;
         public static Config.ConfigManager cfgmgr;
         public static ConsoleGraphic.UI.UIManager uimgr;
+        public static ExceptionManager expmgr;
 
         public static List<Log.LogMessage> logList;
         public static List<CommandLog> commandLogList;
@@ -44,15 +46,15 @@ namespace OpenDOS
                 vFS = new CosmosVFS();
                 VFSManager.RegisterVFS(vFS);
             }
-            catch(Exception e)
+            catch(System.Exception e)
             {
-                Log.Log.ShowLog($"fs: Error occured {e.Message}", Log.LogWarningLevel.Error, Log.LogWritter.System);
-                Console.ReadKey();
+                expmgr.ThrowException(new Exception.Exception("vFS", e.Message, ExceptionLevel.Fatal));
             }
             cmdMgr = new ShellManager();
             usrMgr = new UserManager();
             cfgmgr = new Config.ConfigManager();
             uimgr = new ConsoleGraphic.UI.UIManager();
+            expmgr = new ExceptionManager();
 
             Log.Log.ShowLog("Loading config, Please wait", Log.LogWarningLevel.Information, Log.LogWritter.System);
             if (!File.Exists(@"0:\System\Config\SystemConfig.cfg"))
@@ -72,7 +74,7 @@ namespace OpenDOS
             }
 
             Console.Clear();
-            ConsoleGraphic.Write.WriteTopBar("Alpha 0.1(unstable)", ConsoleColor.Cyan);
+            ConsoleGraphic.Write.WriteTopBar(currentVersion, ConsoleColor.Cyan);
         }
 
         protected override void Run()
@@ -80,7 +82,7 @@ namespace OpenDOS
             if (Console.CursorTop == Console.WindowHeight - 1)
             {
                 Console.Clear();
-                ConsoleGraphic.Write.WriteTopBar("Alpha 0.1(unstable)", ConsoleColor.Cyan);
+                ConsoleGraphic.Write.WriteTopBar(currentVersion, ConsoleColor.Cyan);
                 Console.Write("┌─");
                 ConsoleGraphic.Write.WriteInColor("OpenDOS", ConsoleColor.Cyan);
                 ConsoleGraphic.Write.WriteInColor($" - ", ConsoleColor.White);

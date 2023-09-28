@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace OpenDOS.Shell.Commands
 {
@@ -10,7 +9,7 @@ namespace OpenDOS.Shell.Commands
         public override void cmdExecuteable(string[] args)
         {
             Console.Clear();
-            ConsoleGraphic.Write.WriteTopBar("", ConsoleColor.Cyan);
+            ConsoleGraphic.Write.WriteTopBar(Kernel.currentVersion, ConsoleColor.Cyan);
         }
     }
 }

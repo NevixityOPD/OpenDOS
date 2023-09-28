@@ -8,7 +8,6 @@ namespace OpenDOS.Shell
     {
         //List of registered commands
         public List<Command> shellCommand;
-        public ExceptionHandler exceptionHandler;
         
         public ShellManager()
         {
@@ -30,9 +29,8 @@ namespace OpenDOS.Shell
                 new Commands.cmdShutdown(),
                 new Commands.cmdText(),
                 new Commands.cmdDebug(),
+                new Commands.cmdLog(),
             };
-
-            exceptionHandler = new();
         }
         //Filter command and execute command with a certain name
         public void commandFilter(string s)
@@ -65,17 +63,38 @@ namespace OpenDOS.Shell
                     {
                         if (Kernel.currentUser.userElevation == User.UserElevation.Guest)
                         {
-                            exceptionHandler.HandleCommand(i, args.ToArray());
+                            try
+                            {
+                                shellCommand[i].cmdExecuteable(args.ToArray());
+                            }
+                            catch(System.Exception e)
+                            {
+                                Kernel.expmgr.ThrowBasicException(shellCommand[i].cmdName, e.Message);
+                            }
                             searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.User)
                         {
-                            exceptionHandler.HandleCommand(i, args.ToArray());
+                            try
+                            {
+                                shellCommand[i].cmdExecuteable(args.ToArray());
+                            }
+                            catch (System.Exception e)
+                            {
+                                Kernel.expmgr.ThrowBasicException(shellCommand[i].cmdName, e.Message);
+                            }
                             searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.Root)
                         {
-                            exceptionHandler.HandleCommand(i, args.ToArray());
+                            try
+                            {
+                                shellCommand[i].cmdExecuteable(args.ToArray());
+                            }
+                            catch (System.Exception e)
+                            {
+                                Kernel.expmgr.ThrowBasicException(shellCommand[i].cmdName, e.Message);
+                            }
                             searchResult++;
                         }
                     }
@@ -85,19 +104,40 @@ namespace OpenDOS.Shell
                         {
                             if (Kernel.usrMgr.VerifyUser())
                             {
-                                exceptionHandler.HandleCommand(i, args.ToArray());
+                                try
+                                {
+                                    shellCommand[i].cmdExecuteable(args.ToArray());
+                                }
+                                catch (System.Exception e)
+                                {
+                                    Kernel.expmgr.ThrowBasicException(shellCommand[i].cmdName, e.Message);
+                                }
                                 searchResult++;
                             }
                             searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.User)
                         {
-                            exceptionHandler.HandleCommand(i, args.ToArray());
+                            try
+                            {
+                                shellCommand[i].cmdExecuteable(args.ToArray());
+                            }
+                            catch (System.Exception e)
+                            {
+                                Kernel.expmgr.ThrowBasicException(shellCommand[i].cmdName, e.Message);
+                            }
                             searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.Root)
                         {
-                            shellCommand[i].cmdExecuteable(args.ToArray());
+                            try
+                            {
+                                shellCommand[i].cmdExecuteable(args.ToArray());
+                            }
+                            catch (System.Exception e)
+                            {
+                                Kernel.expmgr.ThrowBasicException(shellCommand[i].cmdName, e.Message);
+                            }
                             searchResult++;
                         }
                     }
@@ -107,7 +147,14 @@ namespace OpenDOS.Shell
                         {
                             if (Kernel.usrMgr.VerifyUser())
                             {
-                                shellCommand[i].cmdExecuteable(args.ToArray());
+                                try
+                                {
+                                    shellCommand[i].cmdExecuteable(args.ToArray());
+                                }
+                                catch (System.Exception e)
+                                {
+                                    Kernel.expmgr.ThrowBasicException(shellCommand[i].cmdName, e.Message);
+                                }
                                 searchResult++;
                             }
                             searchResult++;
@@ -116,14 +163,28 @@ namespace OpenDOS.Shell
                         {
                             if (Kernel.usrMgr.VerifyUser())
                             {
-                                exceptionHandler.HandleCommand(i, args.ToArray());
+                                try
+                                {
+                                    shellCommand[i].cmdExecuteable(args.ToArray());
+                                }
+                                catch (System.Exception e)
+                                {
+                                    Kernel.expmgr.ThrowBasicException(shellCommand[i].cmdName, e.Message);
+                                }
                                 searchResult++;
                             }
                             searchResult++;
                         }
                         else if (Kernel.currentUser.userElevation == User.UserElevation.Root)
                         {
-                            exceptionHandler.HandleCommand(i, args.ToArray());
+                            try
+                            {
+                                shellCommand[i].cmdExecuteable(args.ToArray());
+                            }
+                            catch (System.Exception e)
+                            {
+                                Kernel.expmgr.ThrowBasicException(shellCommand[i].cmdName, e.Message);
+                            }
                             searchResult++;
                         }
                     }
